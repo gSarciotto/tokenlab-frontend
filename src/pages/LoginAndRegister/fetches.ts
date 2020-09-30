@@ -1,5 +1,10 @@
 import { Values } from "./index";
 
+const serverURL = process.env.REACT_APP_SERVER_URL as string;
+if (!serverURL) {
+    console.log("not server defined");
+}
+
 export interface LoginResult {
     success: boolean;
     token?: string;
@@ -10,7 +15,7 @@ export async function login(body: Values): Promise<LoginResult> {
     const result: LoginResult = {
         success: false
     };
-    const response = await fetch("http://localhost:3000/login", {
+    const response = await fetch(`http://${serverURL}/login`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -51,7 +56,7 @@ export async function register(body: Values): Promise<RegisterResult> {
     const result: RegisterResult = {
         success: false
     };
-    const response = await fetch("http://localhost:3000/users", {
+    const response = await fetch(`http://${serverURL}/users`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

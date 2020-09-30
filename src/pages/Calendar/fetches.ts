@@ -1,3 +1,8 @@
+const serverURL = process.env.REACT_APP_SERVER_URL as string;
+if (!serverURL) {
+    console.log("no server defined");
+}
+
 export interface CreateEventResult {
     status: boolean;
     message: string;
@@ -17,7 +22,7 @@ export async function createEvent({
     description
 }: CreateEventParams): Promise<CreateEventResult> {
     let result: CreateEventResult;
-    const response = await fetch("http://localhost:3000/events", {
+    const response = await fetch(`http://${serverURL}/events`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -81,7 +86,7 @@ interface GetEventsResult {
 }
 
 export async function getEvents(token: string): Promise<GetEventsResult> {
-    const response = await fetch("http://localhost:3000/events", {
+    const response = await fetch(`http://${serverURL}/events`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`
@@ -131,7 +136,7 @@ export async function deleteEventFetch({
     token,
     eventId
 }: DeleteEventParams): Promise<DeleteEventResult> {
-    const response = await fetch("http://localhost:3000/events", {
+    const response = await fetch(`http://${serverURL}/events`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -177,7 +182,7 @@ export async function updateEventFetch({
     end,
     description
 }: UpdateEventParams): Promise<UpdateEventResult> {
-    const response = await fetch("http://localhost:3000/events", {
+    const response = await fetch(`http:${serverURL}/events`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
