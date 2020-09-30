@@ -182,7 +182,7 @@ export async function updateEventFetch({
     end,
     description
 }: UpdateEventParams): Promise<UpdateEventResult> {
-    const response = await fetch(`http:${serverURL}/events`, {
+    const response = await fetch(`http://${serverURL}/events`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
