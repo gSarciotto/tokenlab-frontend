@@ -207,6 +207,11 @@ export async function updateEventFetch({
             message:
                 "Evento não encontrado ou você não possue permissão para deletar esse evento."
         });
+    } else if (response.status === 409) {
+        return Promise.resolve({
+            status: false,
+            message: "Evento não atualizado: conflito com outro evento."
+        });
     } else {
         console.log("Erro desconhecido update event: ", response.body);
         return Promise.resolve({
